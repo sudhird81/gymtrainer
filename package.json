@@ -1,0 +1,29 @@
+{
+  "name": "gpt4-nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "antd": "^5.14.0",
+    "autoprefixer": "^10.4.14",
+    "eslint": "8.36.0",
+    "eslint-config-next": "13.2.4",
+    "i18next": "^23.8.2",
+    "jose": "^5.2.1",
+    "js-cookie": "^3.0.5",
+    "next": "^14.1.0",
+    "next-i18next": "^13.2.2",
+    "nookies": "^2.5.2",
+    "postcss": "^8.4.21",
+    "rc-util": "^5.38.1",
+    "react": "^18.2.0",
+    "react-dom": "18.2.0",
+    "react-i18next": "^14.0.5",
+    "tailwindcss": "^3.2.7"
+  }
+}
