@@ -1,7 +1,8 @@
+import users from "@/helpers/constants";
 import { AuthOptions, ISODateString } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
-
+import { useRouter } from "next/navigation";
 
 export type CustomSession = {
     user?: CustomUser;
@@ -10,10 +11,12 @@ export type CustomSession = {
 
 export type CustomUser = {
     id?: string | null;
-    name?: string | null;
+    username?: string | null;
     email?: string | null;
     role?: string | null;
-    avatar?: string | null;
+    password?: string | null;
+
+    // avatar?: string | null;
 
 
 }
@@ -26,19 +29,19 @@ export const authOptions: AuthOptions = {
     },
     callbacks: {
         // async signIn({ account, profile, email, credentials }) {
-        //     const user = {
-        //         username: "kminchelle",
-        //         password: "0lelplR"
-        //     }
+        //     const user = users.find((item)=> item.username === credentials?.username)
+
 
         //     try {
         //         if (user) {
+        //             console.log("userrr", user);
         //             return true
         //         }
         //     } catch (error) {
         //         console.log("error", error)
 
         //     }
+        //     return true
 
         // },
         async session({ session, token, user }:{session:CustomSession, token: JWT, user:CustomUser}) {
@@ -48,7 +51,7 @@ export const authOptions: AuthOptions = {
         },
         async jwt({ user, token }: {token: JWT, user:CustomUser}) {
             if (user) {
-                user.role= user?.role == null ? "User" : user?.role;
+                user.role= user?.role == null ? "user" : user?.role;
                 token.user = user;
             }
             return token
@@ -58,39 +61,29 @@ export const authOptions: AuthOptions = {
         CredentialsProvider({
             name: "next auth",
             credentials: {
-                username: { label: "Username", type: "email", placeholder: "kminchelle" },
+                username: { label: "Username", type: "text", placeholder: "user1" },
+                email: { label: "Email", type: "email" },
                 password: { label: "Password", type: "password" }
+
             },
 
             async authorize(credentials, req) {
-                const user = {
-                    id: "15",
-                    username: "kminchelle",
-                    password: "0lelplR"
+                if(!credentials || !credentials.username || !credentials.password ){
+                    return null;
+
                 }
+               
+                const user = users.find((item)=> item.username === credentials.username)
+                console.log("user-------------------------", user);
+                if(user?.password === credentials.password || user?.username === credentials.username){
+                    return user;
+                }
+                return null;
 
 
-
-                return user
-
-
-
-                // for database user
-
-                // const user = {
-                //     id: "15",    //dynamic user from db
-                //     username: "kminchelle",
-                //     password: "0lelplR"
-                // }
-
-                // if (user) {
-                //     return user
-                // } else {
-                //     return null
-
-                // }
             }
 
         })
-    ]
+    ],
+    secret: process.env.NEXTAUTH_SECRET
 }

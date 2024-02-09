@@ -18,43 +18,55 @@ export default function Login() {
 
   const onLogin = async () => {
     console.log("Login credentials", authCredentials)
-    const headers = { 'Content-Type': 'application/json' }
+    const data = await signIn("credentials", {
+      username: authCredentials.username,
+      password: authCredentials.password,
+      // callbackUrl: '/',
+      // redirect: false
+    })
+    console.log("user data", data)
+    if (data?.status == 200) {
+      router.push("/")
+    } else {
+      router.push("/login")
+    }
 
-    setIsLoading(true)
-    axios.post("https://dummyjson.com/auth/login", authCredentials, { headers })
-      .then((res) => {
-        setIsLoading(false)
-        console.log(res)
-        if (res) {
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('token', res?.data?.token);
-            const userArray = [{
-              username: res?.data?.username,
-              // password: res?.data?.password,
+    // const headers = { 'Content-Type': 'application/json' }
+    // setIsLoading(true)
+    // axios.post("https://dummyjson.com/auth/login", authCredentials, { headers })
+    //   .then((res) => {
+    //     setIsLoading(false)
+    //     console.log(res)
 
-            }];
+    // if (res) {
+    //   if (typeof window !== 'undefined') {
+    //     localStorage.setItem('token', res?.data?.token);
+    //     const userArray = [{
+    //       username: res?.data?.username,
+    //       // password: res?.data?.password,
 
-            const userArrayString = JSON.stringify(userArray);
+    //     }];
 
-            localStorage.setItem('user', userArrayString);
-            // router.push('/')
-            signIn("credentials", {
-              username: authCredentials.username,
-              password: authCredentials.password,
-              callbackUrl: '/',
-              redirect: true
-            })
+    //     const userArrayString = JSON.stringify(userArray);
 
-          }
+    //     localStorage.setItem('user', userArrayString);
+    //     // router.push('/')
+    //     signIn("credentials", {
+    //       username: authCredentials.username,
+    //       password: authCredentials.password,
+    //       callbackUrl: '/',
+    //       redirect: true
+    //     })
 
-        }
+    //   }
 
-      })
-      .catch((err) => {
-        setIsLoading(false)
-        console.log("err", err)
+    // }
+    // })
+    // .catch((err) => {
+    //   setIsLoading(false)
+    //   console.log("err", err)
 
-      })
+    // })
   }
 
   return (

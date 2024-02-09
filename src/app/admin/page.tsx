@@ -1,17 +1,33 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function AdminLogin() {
-  const [authCredentials, setAuthCredentials] = useState({
+  const router = useRouter();
+  const [authAdminCredentials, setAuthAdminCredentials] = useState({
     username: '',
     password: '',
 
   });
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("amdin credentials", authCredentials)
+    console.log("amdin credentials", authAdminCredentials)
+    const data = await signIn("credentials", {
+      username: authAdminCredentials.username,
+      password: authAdminCredentials.password,
+      // callbackUrl: '/admin/dashboard',
+      // redirect: false
+    })
+    console.log("admin data", data?.status)
+    // if (data?.status === 200) {
+    //   router.push("/admin/dashboard")
 
+    // } else {
+    //   router.push("/admin")
+
+    // }
   }
 
 
@@ -41,15 +57,14 @@ export default function AdminLogin() {
             <div className="space-y-5">
               <div>
                 <label htmlFor="" className="text-base font-medium text-gray-900">
-                  {' '}
-                  Email address{' '}
+                  Username
                 </label>
                 <div className="mt-2">
                   <input
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="text"
                     placeholder="Username"
-                    onChange={(e) => setAuthCredentials({ ...authCredentials, username: e.target.value })}
+                    onChange={(e) => setAuthAdminCredentials({ ...authAdminCredentials, username: e.target.value })}
 
                   ></input>
                 </div>
@@ -69,7 +84,7 @@ export default function AdminLogin() {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="password"
                     placeholder="Password"
-                    onChange={(e) => setAuthCredentials({ ...authCredentials, password: e.target.value })}
+                    onChange={(e) => setAuthAdminCredentials({ ...authAdminCredentials, password: e.target.value })}
 
                   ></input>
                 </div>
