@@ -4,17 +4,18 @@ import { redirect } from "next/navigation";
 import MainLayout from "@/components/MainLayout/MainLayout";
 
 export default function Home() {
-
-  const session = getServerSession(authOptions)
+  const session = getServerSession(authOptions);
   if (!session) {
-    redirect('/login')
+    redirect("/login");
   }
+
+  const data = getServerSession(authOptions)
+
   return (
     <>
 
-      {/* <p>{JSON.stringify(session)}</p> */}
+      <p>{JSON.stringify(data)}</p>
       <MainLayout />
     </>
-
-  )
+  );
 }
