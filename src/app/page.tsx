@@ -3,16 +3,14 @@ import { authOptions } from "./api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 
 export default function Home() {
-  
-  const session = getServerSession(authOptions)
+  const session = getServerSession(authOptions);
   if (!session) {
-    redirect('/login')
+    redirect("/login");
   }
   return (
     <>
-    <p>Home</p>
-    <p>{JSON.stringify(session)}</p>
+      <p>Mind Growth</p>
+      <p>{JSON.stringify(session)}</p>
     </>
-
-  )
+  );
 }
