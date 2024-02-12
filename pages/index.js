@@ -2,22 +2,18 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import Link from 'next/link';
-
-// const session: CustomSession | null = await getServerSession(authOptions)
-
-// if (!session) {
-//   redirect("/login");
-// }
+import { useSession } from "next-auth/react"
+import MainLayout from '../components/MainLayout'
 
 export default function Home({ data, locale }) {
   const { t } = useTranslation();
-  console.log("t", t)
+  console.log("t", t);
+
 
   return (
     <>
 
-      {/* {session ? <p>{JSON.stringify(session)}</p> : "No Active Session" } */}
-      {/* <MainLayout /> */}
+      <MainLayout />
 
       <div>
         <Head>
@@ -25,6 +21,7 @@ export default function Home({ data, locale }) {
         </Head>
         <div className='grid grid-rows-4 p-4 md:grid-rows-2 md:p-0 grid-flow-col gap-4'>
           <p>{t('main_title')}</p>
+
           {/* {data.map((news, id) => (
             <div
               key={id}
