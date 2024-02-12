@@ -1,6 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
-import { CustomUser } from "./pages/api/auth/[...nextauth]/options";
+// import { CustomUser } from "./pages/api/auth/[...nextauth]";
 // import { i18nRouter } from "next-i18n-router";
 // import i18nConfig from "../i18nConfig";
 

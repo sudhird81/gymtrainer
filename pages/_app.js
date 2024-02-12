@@ -15,7 +15,6 @@ function MyApp({
         <Component {...pageProps} />
       </SessionProvider>
     </main>
-
   )
 }
 // function MyApp({ Component, pageProps }) {
