@@ -11,13 +11,11 @@ export async function middleware(request: NextRequest) {
     if (pathname == "/login" || pathname == "/admin") {
         console.log("hereee")
         return NextResponse.next()
-    }else {
-        console.log(" am here  ")
-
     }
 
     const token = await getToken({ req: request }) 
 
+    // console.log("token", token)
 
     //* Protected route for user
     const userProtectedRoutes = ['/', '/profile']
@@ -29,25 +27,21 @@ export async function middleware(request: NextRequest) {
 
 
     if (token == null && (userProtectedRoutes.includes(pathname) || adminProtectedRoutes.includes(pathname))) {
-        console.log("here 1")
+        console.log("token null and tried to access route")
         return NextResponse.redirect(
           new URL("/login",request.url));
-        }
+    }
     
     //* Get user from token
     const user: CustomUser | null = token?.user as CustomUser
 
     //* If user try to access admin routes
-    if (userProtectedRoutes.includes(pathname) && user.role == "User") {
-        console.log("here 2")
-
+    if (adminProtectedRoutes.includes(pathname) && user.role == "User") {
         return NextResponse.redirect(new URL('/login', request.url))
     }
 
     //* If admin try to access admin routes
-    if (adminProtectedRoutes.includes(pathname) && user.role == "Admin") {
-        console.log("here 3")
-
+    if (userProtectedRoutes.includes(pathname) && user.role == "Admin") {
         return NextResponse.redirect(new URL('/admin', request.url));
 
     }

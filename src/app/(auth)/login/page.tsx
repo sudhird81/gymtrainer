@@ -8,7 +8,6 @@ import { signIn } from 'next-auth/react';
 export default function Login() {
   const router = useRouter();
   const [authCredentials, setAuthCredentials] = useState({
-
     username: '',
     password: '',
 
@@ -21,15 +20,16 @@ export default function Login() {
     const data = await signIn("credentials", {
       username: authCredentials.username,
       password: authCredentials.password,
-      // callbackUrl: '/',
+      callbackUrl: '/',
       // redirect: false
     })
     console.log("user data", data)
-    if (data?.status == 200) {
-      router.push("/")
-    } else {
-      router.push("/login")
-    }
+    
+    // if (data?.status == 200) {
+    //   router.push("/")
+    // } else {
+    //   router.push("/login")
+    // }
 
     // const headers = { 'Content-Type': 'application/json' }
     // setIsLoading(true)

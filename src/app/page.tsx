@@ -1,20 +1,20 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/options";
+import { CustomSession, authOptions } from "./api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import MainLayout from "@/components/MainLayout/MainLayout";
 
-export default function Home() {
-  const session = getServerSession(authOptions);
+
+export default async function Home() {
+  const session: CustomSession | null = await getServerSession(authOptions)
+
   if (!session) {
     redirect("/login");
   }
 
-  const data = getServerSession(authOptions)
-
   return (
     <>
 
-      <p>{JSON.stringify(data)}</p>
+      {session ? <p>{JSON.stringify(session)}</p> : "No Active Session"}
       <MainLayout />
     </>
   );

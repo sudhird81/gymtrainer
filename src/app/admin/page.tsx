@@ -17,7 +17,7 @@ export default function AdminLogin() {
     const data = await signIn("credentials", {
       username: authAdminCredentials.username,
       password: authAdminCredentials.password,
-      // callbackUrl: '/admin/dashboard',
+      callbackUrl: '/admin/dashboard',
       // redirect: false
     })
     console.log("admin data", data?.status)

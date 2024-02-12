@@ -1,8 +1,8 @@
 const users = [ 
     {
         id: "1",
-        username: "admin1",
-        email: "admin1@gmail.com",
+        username: "admin",
+        email: "admin@gmail.com",
         password: "123",
         role: "Admin",
 
