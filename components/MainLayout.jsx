@@ -1,10 +1,10 @@
-import { Navbar } from "../Navbar/Navbar";
+import Header from "./Header";
 
 export default function MainLayout() {
 
     return (
         <>
-            <Navbar />
+            <Header />
 
         </>
 

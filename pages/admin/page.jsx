@@ -11,7 +11,7 @@ export default function AdminLogin() {
 
   });
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("amdin credentials", authAdminCredentials)
     const data = await signIn("credentials", {

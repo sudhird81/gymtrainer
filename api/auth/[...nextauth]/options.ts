@@ -1,4 +1,4 @@
-import users from "@/helpers/constants";
+import users from "../../../helpers/constants";
 import { AuthOptions, ISODateString } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
