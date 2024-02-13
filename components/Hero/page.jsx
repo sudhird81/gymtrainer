@@ -42,7 +42,7 @@ export default function Hero() {
         <div>
           <p className="mb-4">For You</p>
           <ul className="">
-            <li>
+            <li className="flex">
               {" "}
               <CheckIcon
                 className="h-6 w-5 flex-none text-indigo-600"
@@ -50,7 +50,7 @@ export default function Hero() {
               />
               Find out which food is best for you
             </li>
-            <li>
+            <li className="flex">
               {" "}
               <CheckIcon
                 className="h-6 w-5 flex-none text-indigo-600"
@@ -58,7 +58,7 @@ export default function Hero() {
               />
               Improve Your Well-Being
             </li>
-            <li>
+            <li className="flex">
               {" "}
               <CheckIcon
                 className="h-6 w-5 flex-none text-indigo-600"
@@ -71,14 +71,14 @@ export default function Hero() {
         <div>
           <p className="mb-4">For Nutritionists</p>
           <ul className="">
-            <li>
+            <li className="flex">
               <CheckIcon
                 className="h-6 w-5 flex-none text-indigo-600"
                 aria-hidden="true"
               />{" "}
               Find Clients
             </li>
-            <li>
+            <li className="flex">
               <CheckIcon
                 className="h-6 w-5 flex-none text-indigo-600"
                 aria-hidden="true"
@@ -90,7 +90,7 @@ export default function Hero() {
         <div>
           <p className="mb-4">For Partners</p>
           <ul className="">
-            <li>
+            <li className="flex">
               <CheckIcon
                 className="h-6 w-5 flex-none text-indigo-600"
                 aria-hidden="true"

@@ -1,47 +1,61 @@
-import { useTranslation } from 'next-i18next';
-import Link from 'next/link';
-import LanguageSwitcher from './LanguageSwitcher';
-import React from 'react'
+"use client";
+import { useTranslation } from "next-i18next";
+import React, { useEffect, useState } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
 // import { Menu, X } from 'lucide-react'
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-
+import { Menu, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Fragment } from "react";
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 const menuItems = [
   {
-    name: 'Home',
-    href: '#',
+    name: "Home",
+    href: "#",
   },
   {
-    name: 'About',
-    href: '#',
+    name: "About",
+    href: "#",
   },
   {
-    name: 'Contact',
-    href: '#',
+    name: "Contact",
+    href: "#",
   },
-]
+];
 
 export default function Header() {
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset;
+      const shouldBeSticky = scrollTop > 0;
+
+      setIsSticky(shouldBeSticky);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   const { t } = useTranslation();
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleSearchSubmit = () => {
-    console.log("search value")
-  }
+    console.log("search value");
+  };
 
   return (
     <>
-
       {/* <header>
         <div className='bg-red-100 border-b-2 border-red-900 p-5 flex justify-center items-center space-x-6'>
           <Link href='/'>
@@ -52,28 +66,31 @@ export default function Header() {
           <LanguageSwitcher />
         </div>
       </header> */}
+      {/* <div class="relative"> */}
+      {/* class="fixed top-0 flex w-full flex-wrap items-center justify-between bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4"> */}
 
-      <div className="relative w-full bg-white">
+      <div
+        className={` ${
+          isSticky ? "bg-[#5c3eb8] fixed right-0 left-0" : "bg-white "
+        } right-0 left-0 top-0`}
+      >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
             <span>
-              <img
-                src="logo.png"
-                alt="no image"
-                width="250"
-                height="250"
-              />
+              <img src="logo.png" alt="no image" width="250" height="250" />
             </span>
           </div>
           <div className="hidden lg:block">
             <form onSubmit={handleSearchSubmit}>
               <div className="flex align-items-center justify-content-center">
-
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
                     <Menu.Button className="inline-flex w-full h-10 justify-center gap-x-1.5 bg-gray-100 px-3 py-2.5 text-sm font-semibold text-gray-500 shadow-sm ring-1 ring-inset ring-gray-200 hover:bg-gray-50">
                       Select...
-                      <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+                      <ChevronDownIcon
+                        className="-mr-1 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
                     </Menu.Button>
                   </div>
 
@@ -93,8 +110,10 @@ export default function Header() {
                             <a
                               href="#"
                               className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm'
+                                active
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700",
+                                "block px-4 py-2 text-sm"
                               )}
                             >
                               Gyms
@@ -106,8 +125,10 @@ export default function Header() {
                             <a
                               href="#"
                               className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm'
+                                active
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700",
+                                "block px-4 py-2 text-sm"
                               )}
                             >
                               Trainers
@@ -119,8 +140,10 @@ export default function Header() {
                             <a
                               href="#"
                               className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-2 text-sm'
+                                active
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700",
+                                "block px-4 py-2 text-sm"
                               )}
                             >
                               Dieticians
@@ -152,7 +175,6 @@ export default function Header() {
                   type="text"
                   placeholder="Search trainers, gym, nutritionist..."
                 ></input>
-
               </div>
             </form>
           </div>
@@ -211,7 +233,7 @@ export default function Header() {
                         className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                       >
                         <span className="sr-only">Close menu</span>
-                        <X className="h-6 w-6" aria-hidden="true" />
+                        {/* <X className="h-6 w-6" aria-hidden="true" /> */}
                       </button>
                     </div>
                   </div>
@@ -243,15 +265,11 @@ export default function Header() {
         </div>
       </div>
 
-
-      <div className="relative w-full bg-white p-4 ">
+      <div className="sticky w-full bg-white p-4 ">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
           <div className="inline-flex items-center space-x-2">
-            <span>
-
-            </span>
+            <span></span>
           </div>
-
 
           <div className="hidden lg:block">
             {/* <ul className="inline-flex space-x-8">
@@ -271,7 +289,10 @@ export default function Header() {
               <div>
                 <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-gray-300 hover:bg-gray-50">
                   For you
-                  <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+                  <ChevronDownIcon
+                    className="-mr-1 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
                 </Menu.Button>
               </div>
 
@@ -291,8 +312,10 @@ export default function Header() {
                         <a
                           href="/login"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Edit
@@ -304,8 +327,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Duplicate
@@ -319,8 +344,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Archive
@@ -332,8 +359,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Move
@@ -347,8 +376,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Share
@@ -360,8 +391,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Add to favorites
@@ -375,8 +408,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Delete
@@ -391,7 +426,10 @@ export default function Header() {
               <div>
                 <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm  ring-gray-300 hover:bg-gray-50">
                   For Nutritionist
-                  <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+                  <ChevronDownIcon
+                    className="-mr-1 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
                 </Menu.Button>
               </div>
 
@@ -411,8 +449,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Edit
@@ -424,8 +464,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Duplicate
@@ -439,8 +481,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Archive
@@ -452,8 +496,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Move
@@ -467,8 +513,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Share
@@ -480,8 +528,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Add to favorites
@@ -495,8 +545,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Delete
@@ -511,7 +563,10 @@ export default function Header() {
               <div>
                 <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-gray-300 hover:bg-gray-50">
                   For our partners
-                  <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+                  <ChevronDownIcon
+                    className="-mr-1 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
                 </Menu.Button>
               </div>
 
@@ -531,8 +586,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Edit
@@ -544,8 +601,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Duplicate
@@ -559,8 +618,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Archive
@@ -572,8 +633,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Move
@@ -587,8 +650,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Share
@@ -600,8 +665,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Add to favorites
@@ -615,8 +682,10 @@ export default function Header() {
                         <a
                           href="#"
                           className={classNames(
-                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                            'block px-4 py-2 text-sm'
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
                           )}
                         >
                           Delete
@@ -691,6 +760,7 @@ export default function Header() {
           )}
         </div>
       </div>
+      {/* </div> */}
     </>
   );
 }
