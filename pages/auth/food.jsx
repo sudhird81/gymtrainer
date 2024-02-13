@@ -1,4 +1,4 @@
-import FoodPage from "../components/searchFood/page"
+import FoodPage from "../../components/searchFood/page"
 export default function FoodPageCreate() {
 
     return (
