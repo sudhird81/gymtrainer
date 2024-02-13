@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useSession } from "next-auth/react"
 import MainLayout from '../components/MainLayout'
+import Footer from '../components/Footer';
 
 export default function Home({ data, locale }) {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ export default function Home({ data, locale }) {
         <Head>
           <title>{t('app_title')}</title>
         </Head>
-        <div className='grid grid-rows-4 p-4 md:grid-rows-2 md:p-0 grid-flow-col gap-4'>
+        <div className='grid grid-rows-4 p-4 md:grid-rows-2 md:p-0 grid-flow-col gap-4 min-h-screen'>
           <p>{t('main_title')}</p>
 
           {/* {data.map((news, id) => (
@@ -58,6 +59,7 @@ export default function Home({ data, locale }) {
           ))} */}
         </div>
       </div>
+      <Footer/>
 
     </>
 
