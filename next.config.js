@@ -18,6 +18,12 @@ const nextConfig = {
     return config;
   },
   i18n,
+  images: {
+    domains: [
+      "plus.unsplash.com","www.shutterstock.com"
+    
+    ],
+  },
 };
 
 module.exports = nextConfig;
