@@ -4,6 +4,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useSession } from "next-auth/react"
 import MainLayout from '../components/MainLayout'
+import HeroPage from '../components/Hero/page';
+import FoodPage from '../components/searchFood/page';
+import AcceptPage from '../components/Accept&Close/page';
 
 
 export default function MainContent() {
@@ -17,8 +20,13 @@ export default function MainContent() {
                 <Head>
                     <title>{t('app_title')}</title>
                 </Head>
-                <div className='grid grid-rows-4 p-4 md:grid-rows-2 md:p-0 grid-flow-col gap-4 min-h-screen'>
                     <p>{t('main_title')}</p>
+                    <HeroPage/>
+                    <FoodPage/>
+                    <AcceptPage/>
+
+                {/* <div className='grid grid-rows-4 p-4 md:grid-rows-2 md:p-0 grid-flow-col gap-4 min-h-screen'> */}
+
 
                     {/* {data.map((news, id) => (
             <div
@@ -54,7 +62,7 @@ export default function MainContent() {
               </Link>
             </div>
           ))} */}
-                </div>
+                {/* </div> */}
             </div>
         </>
     )

@@ -6,6 +6,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
+import Link from "next/link";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -75,11 +76,13 @@ export default function Header() {
         } right-0 left-0 top-0`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
+         <Link href='/'>
           <div className="inline-flex items-center space-x-2">
             <span>
               <img src="logo.png" alt="no image" width="250" height="250" />
             </span>
           </div>
+         </Link>
           <div className="hidden lg:block">
             <form onSubmit={handleSearchSubmit}>
               <div className="flex align-items-center justify-content-center">
@@ -185,12 +188,16 @@ export default function Header() {
             >
               JOIN OUR COMMUNITY
             </button>
+            <Link href="/about" passHref>
+
             <button
               type="button"
               className="text-sm m-3 font-bold text-gray-800 hover:text-gray-900"
             >
               ABOUT US
             </button>
+            </Link>
+
             <Menu as="div" className="relative inline-block text-left">
               <div>
                 <LanguageSwitcher />

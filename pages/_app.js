@@ -8,11 +8,9 @@ function MyApp({
   pageProps: { session, ...pageProps },
 }) {
   return (
-    <main className='container mx-auto '>
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
         <Component {...pageProps} />
       </SessionProvider>
-    </main>
   )
 }
 // function MyApp({ Component, pageProps }) {

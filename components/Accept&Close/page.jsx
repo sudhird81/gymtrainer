@@ -1,5 +1,4 @@
 import Button from "../UI/Button";
-import Footer from "../Footer";
 
 export default function Accept() {
   return (
@@ -23,7 +22,6 @@ export default function Accept() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

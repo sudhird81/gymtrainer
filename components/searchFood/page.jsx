@@ -1,7 +1,6 @@
 import { AiOutlineDash } from "react-icons/ai";
 import { FaPlusSquare } from "react-icons/fa";
 import { MdOutlineChevronRight } from "react-icons/md";
-import Header from "../Header";
 import Button from "../UI/Button";
 import Select from "../UI/Select";
 export default function Food({
@@ -20,7 +19,6 @@ export default function Food({
 
   return (
     <>
-    <Header/>
       <section className="w-full  ">
         <div className=" max-w-7xl px-2 py-10 lg:px-1">
           {/* Top */}
