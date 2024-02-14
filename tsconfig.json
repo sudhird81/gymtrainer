@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -20,9 +16,10 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "pages/unauth/register.jsx", "pages/unauth/login.jsx", "providers/NextAuthProvider.jsx"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "**/*.tsx",
+    "pages/unauth/register.jsx",
+    "pages/unauth/login.jsx",
+    "providers/NextAuthProvider.jsx"
+  ],
+  "exclude": ["node_modules"]
 }
