@@ -7,6 +7,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -75,11 +76,11 @@ export default function Header() {
           isSticky ? "bg-[#5c3eb8] fixed right-0 left-0" : "bg-white "
         } right-0 left-0 top-0`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-8xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
          <Link href='/'>
           <div className="inline-flex items-center space-x-2">
             <span>
-              <img src="logo.png" alt="no image" width="250" height="250" />
+              <Image src="/logo.png" alt="no image" width="250" height="250" />
             </span>
           </div>
          </Link>
